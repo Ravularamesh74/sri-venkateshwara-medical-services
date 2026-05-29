@@ -35,10 +35,10 @@ export function Footer() {
         <div>
           <h4 className="font-semibold">Reach Us</h4>
           <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5" /> <a href="tel:+919700041231">+91 97000 41231</a></li>
-            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5" /> Jangaon, Telangana, India</li>
-            <li className="flex gap-2"><Clock className="h-4 w-4 mt-0.5" /> 24 / 7 Emergency</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5" /> contact@srivenkateshwara.in</li>
+            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5" /><a href="tel:+919700041231">+91 97000 41231</a></li>
+            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5" /><span>Jangaon, Telangana, India</span></li>
+            <li className="flex gap-2"><Clock className="h-4 w-4 mt-0.5" /><span>24 / 7 Emergency</span></li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5" /><span>contact@srivenkateshwara.in</span></li>
           </ul>
         </div>
       </div>
