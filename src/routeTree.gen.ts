@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as MedicalGasRouteImport } from './routes/medical-gas'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AmbulanceRouteImport } from './routes/ambulance'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ServicesRoute = ServicesRouteImport.update({
@@ -30,9 +32,19 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AmbulanceRoute = AmbulanceRouteImport.update({
   id: '/ambulance',
   path: '/ambulance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,14 +55,18 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/ambulance': typeof AmbulanceRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/medical-gas': typeof MedicalGasRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/ambulance': typeof AmbulanceRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/medical-gas': typeof MedicalGasRoute
   '/services': typeof ServicesRoute
@@ -58,20 +74,38 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/ambulance': typeof AmbulanceRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/medical-gas': typeof MedicalGasRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ambulance' | '/gallery' | '/medical-gas' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/ambulance'
+    | '/contact'
+    | '/gallery'
+    | '/medical-gas'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ambulance' | '/gallery' | '/medical-gas' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/ambulance'
+    | '/contact'
+    | '/gallery'
+    | '/medical-gas'
+    | '/services'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/ambulance'
+    | '/contact'
     | '/gallery'
     | '/medical-gas'
     | '/services'
@@ -79,7 +113,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AmbulanceRoute: typeof AmbulanceRoute
+  ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   MedicalGasRoute: typeof MedicalGasRoute
   ServicesRoute: typeof ServicesRoute
@@ -108,11 +144,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ambulance': {
       id: '/ambulance'
       path: '/ambulance'
       fullPath: '/ambulance'
       preLoaderRoute: typeof AmbulanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -127,7 +177,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AmbulanceRoute: AmbulanceRoute,
+  ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   MedicalGasRoute: MedicalGasRoute,
   ServicesRoute: ServicesRoute,
