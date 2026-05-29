@@ -11,7 +11,35 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
+const WHATSAPP_NUMBER = "919700041231";
+
 function Contact() {
+  const handleCallbackSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get("name") ?? "").trim();
+    const phone = String(fd.get("phone") ?? "").trim();
+    const service = String(fd.get("service") ?? "").trim();
+    const message = String(fd.get("message") ?? "").trim();
+
+    const text = [
+      "Callback request from website",
+      "",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Service: ${service}`,
+      message ? `Message: ${message}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+
   return (
     <Layout>
       <PageHero eyebrow="Contact" title="We're here, 24 hours a day." subtitle="Call us for emergencies, refills, bookings or queries — anytime." />
@@ -46,20 +74,20 @@ function Contact() {
             </div>
           </div>
 
-          <form className="rounded-3xl border border-border bg-card p-8 shadow-soft" onSubmit={(e)=>{e.preventDefault(); alert("Thank you! We'll call you back shortly.");}}>
+          <form className="rounded-3xl border border-border bg-card p-8 shadow-soft" onSubmit={handleCallbackSubmit}>
             <h2 className="font-display text-2xl font-extrabold">Send us a message</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Or just call directly — fastest way to reach us.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Submit to open WhatsApp with your details — or call directly for emergencies.</p>
             <div className="mt-6 grid gap-4">
-              <input required placeholder="Your name" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
-              <input required type="tel" placeholder="Phone number" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
-              <select className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring">
+              <input name="name" required placeholder="Your name" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
+              <input name="phone" required type="tel" placeholder="Phone number" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
+              <select name="service" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring">
                 <option>Ambulance Service</option>
                 <option>Medical Gas / Oxygen</option>
                 <option>Freezer Box</option>
                 <option>Other</option>
               </select>
-              <textarea rows={4} placeholder="Message" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
-              <button className="rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90">Request Callback</button>
+              <textarea name="message" rows={4} placeholder="Message" className="rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
+              <button type="submit" className="rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90">Request Callback on WhatsApp</button>
             </div>
           </form>
         </div>
