@@ -109,6 +109,7 @@ function Home() {
           ))}
         </div>
       </section>
+      
 
       {/* ABOUT STRIP */}
       <section className="bg-secondary/60">
